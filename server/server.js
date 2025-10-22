@@ -14,6 +14,12 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log(`📌 ~ socket: server`, socket.id);
 
+  socket.on('testMessage', (data) => {
+    console.log(`📌 ~ Message send from ui:`, data);
+
+    socket.broadcast.emit('testMessage2', data);
+  });
+
   socket.on('disconnect', () => {
     console.log('Client disconnected:server', socket.id);
   });
